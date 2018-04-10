@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const path = require('path');
+const uuidv1 = require('uuid/v1');
 
 // Set private/public paths
 const publicPath = path.join(__dirname, './public');
@@ -24,7 +25,10 @@ app.get('/', (req, res) => {
 
 // POST / - game creation route
 app.post('/', (req, res) => {
-    res.sendFile(path.join(privatePath + '/game.html'));
+    //Create game room in logic
+    const roomId = uuidv1();
+    //Redirect to 
+    res.redirect(`/game/${roomId}`);
 });
 
 // GET /game/:id - join game with :id route
