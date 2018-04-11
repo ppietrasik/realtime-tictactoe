@@ -7,12 +7,12 @@ const gameSocketsHandler = (gamesManager, io) => {
         socket.on('join', (gameId, callback) => {
             let game = gamesManager.getGame(gameId.roomId);
 
-            if(!game) return 'Game not found';
+            if(!game) return callback('Game not found');
 
             let player = game.getPlayer(socket.id);
 
             //If player does 
-            if(game.isFull()) return console.log('Game is full');
+            if(game.isFull()) return callback('Game is full');
             
             //If player does not exist, create one
             if(!player) game.addPlayer(socket.id);
@@ -30,13 +30,13 @@ const gameSocketsHandler = (gamesManager, io) => {
             //Get game
             const game = gamesManager.getGame(message.roomId);
 
-            if(!game) return console.log('Game not found');
+            if(!game) return callback('Game not found');
 
             //Get player
             const player = game.getPlayer(socket.id);
 
             //If game or player does not exist
-            if(!player) return console.log('Invalid move');
+            if(!player) return callback('Invalid move');
 
             //Check if move is valid
             game.makeMove(player, message.tileId);

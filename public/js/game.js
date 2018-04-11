@@ -1,5 +1,4 @@
 //Written as if ES6 was unavailable
-
 var socket = io();
 
  //TODO aka fast-fix (sure not for prod :) )

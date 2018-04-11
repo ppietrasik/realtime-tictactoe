@@ -1,0 +1,115 @@
+.body {
+    border-radius: 40px;
+    background-image: -webkit-linear-gradient(270deg, #415161, #415161);
+    background-image: linear-gradient(180deg, #415161, #415161);
+    font-family: 'Exo', sans-serif;
+  }
+  
+  .container {
+    position: static;
+    display: block;
+    margin-top: 160px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  
+  .title {
+    font-family: Exo, sans-serif;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 20px;
+  }
+  
+  .section {
+    display: block;
+    width: 500px;
+    height: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    padding-bottom: auto;
+    border: 1px none #000;
+    border-radius: 6px;
+    background-image: -webkit-linear-gradient(270deg, #4f5f6e, #4f5f6e);
+    background-image: linear-gradient(180deg, #4f5f6e, #4f5f6e);
+  }
+  
+  .clearfix:after {  
+    content: "";
+    display: table;
+    clear: both;
+    padding-bottom: 20px;
+  }
+  
+  .containergame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  
+  p {
+    font-weight: 400;
+  }
+  
+  h3 {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+  }
+  
+  .board {
+    position: relative;
+    width: 22em;
+    font-family: sans-serif;
+    font-weight: 700;
+    margin: 0 auto;
+  }
+  
+  .row {
+    float: left;
+  }
+  
+  .row:first-child .square {
+    border-top: 0;
+  }
+  
+  .square {
+    color: #576778 ;
+    border-color: #576778;
+    font-size: 6em;
+    width: 1.2em;
+    height: 1.2em;
+    line-height: 1.2em;
+    float: left;
+    border-style: solid;
+    border-width: 1px 1px 0 0;
+    text-align: center;
+    cursor: default;
+  }
+  
+  .square:last-child {
+    border-right: 0px;
+  }
+  
+  .x-marker {
+    color: #82cced;
+  }
+  
+  .o-marker {
+    color: #d6a1d0;
+  }
+  
+  .button-area span {
+    display: inline-block;
+    background-color: hsla(30, 10%, 20%, 0.95);
+    margin: 0.2em 0.2em 0 0.2em;
+  }
+  
+  .button-area span:hover {
+    cursor: pointer;
+    background-color: hsla(30, 10%, 30%, 0.95);
+  }
