@@ -1,26 +1,70 @@
-io.on('connection', (socket) => {
-    console.log('New User connected.');
+const {Game, Player} = require('./game');
 
-    socket.on('join', (gameId, callback) => {
-        //Let player join if room is not already full
-        socket.join(gameId.id);
+const gameSocketsHandler = (gamesManager, io) => {
+    io.on('connection', (socket) => {
+        console.log('New User connected.');
 
-        //Send gamestate to players
-        io.to('test-room').emit('updateGameState', {state});
+        socket.on('join', (gameId, callback) => {
+            let game = gamesManager.getGame(gameId.roomId);
 
-        callback();
+            if(!game) return 'Game not found';
+
+            let player = game.getPlayer(socket.id);
+
+            //If player does 
+            if(game.isFull()) return console.log('Game is full');
+            
+            //If player does not exist, create one
+            if(!player) game.addPlayer(socket.id);
+
+            //Join socket room
+            socket.join(game.roomId);
+
+            //Send gamestate to players
+            io.to(game.roomId).emit('updateGameState', game.getGameState());
+            console.log(JSON.stringify(game.getGameState(), undefined, 2));
+            callback();
+        });
+
+        socket.on('playerMove', (message, callback) => {
+            //Get game
+            const game = gamesManager.getGame(message.roomId);
+
+            if(!game) return console.log('Game not found');
+
+            //Get player
+            const player = game.getPlayer(socket.id);
+
+            //If game or player does not exist
+            if(!player) return console.log('Invalid move');
+
+            //Check if move is valid
+            game.makeMove(player, message.tileId);
+
+            //Send updated game state to players
+            io.to(message.roomId).emit('updateGameState', game.getGameState());
+            console.log(JSON.stringify(game.getGameState(), undefined, 2));
+            callback();
+        });
+
+        socket.on('disconnect', () => {
+            console.log('User has disconnected form server.');
+            //Update state to tell other player that oppenent has disconnected
+            //Get game
+            const game = gamesManager.getGameByPlayer(socket.id);
+            if(!game) return console.log('Game not found Dissconect');
+
+            //Get player
+            const player = game.getPlayer(socket.id);
+
+            //If game or player does not exist
+            if(!game || !player) return console.log('Invalid Dissconect');
+
+            game.removePlayer(player);
+
+            io.to(game.roomId).emit('updateGameState', game.getGameState());
+        });
     });
+};
 
-    socket.on('playerMove', (message, callback) => {
-        //Get game
-        //Check if move is valid
-        //Send updated game state to players
-        io.to('test-room').emit('updateGameState', {state});
-        callback();
-    });
-
-    socket.on('disconnect', () => {
-        console.log('User has disconnected form server.');
-        //Update state to tell other player that oppenent has disconnected.
-    });
-});
+module.exports = {gameSocketsHandler};
