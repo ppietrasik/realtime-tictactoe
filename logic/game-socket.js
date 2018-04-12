@@ -22,7 +22,6 @@ const gameSocketsHandler = (gamesManager, io) => {
 
             //Send gamestate to players
             io.to(game.roomId).emit('updateGameState', game.getGameState());
-            console.log(JSON.stringify(game.getGameState(), undefined, 2));
             callback();
         });
 
@@ -43,7 +42,6 @@ const gameSocketsHandler = (gamesManager, io) => {
 
             //Send updated game state to players
             io.to(message.roomId).emit('updateGameState', game.getGameState());
-            console.log(JSON.stringify(game.getGameState(), undefined, 2));
             callback();
         });
 
