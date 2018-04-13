@@ -1,6 +1,8 @@
 Real-Time socket.io tic-tac-toe game, made with node.js and socket.io
 
-TODO: Cookies instead of sokcet.id? ()
+TODO: Cookies instead of sokcet.id?
+
+Demo: https://pacific-wildwood-42200.herokuapp.com/ (Just create game and share link with someone)
 
 
 Styles: https://codepen.io/thepeted/pen/qOJVyK
