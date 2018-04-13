@@ -4,7 +4,10 @@
   "description": "Real-time tic-tac-toe game, made with socket.io and express.js",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.9.4"
   },
   "author": "",
   "license": "ISC",
