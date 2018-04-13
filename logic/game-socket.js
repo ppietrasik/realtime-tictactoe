@@ -11,16 +11,16 @@ const gameSocketsHandler = (gamesManager, io) => {
 
             let player = game.getPlayer(socket.id);
 
-            //If player does 
+            // If player does 
             if(game.isFull()) return callback('Game is full');
             
-            //If player does not exist, create one
-            if(!player) game.addPlayer(socket.id);
+            // If player does not exist, create one
+            if(!player)  player = game.addPlayer(socket.id);
 
-            //Join socket room
+            // Join socket room
             socket.join(game.roomId);
 
-            //Send gamestate to players
+            // Send gamestate to players
             io.to(game.roomId).emit('updateGameState', game.getGameState());
             callback();
         });

@@ -1,7 +1,10 @@
 //Written as if ES6 was unavailable
 var socket = io();
-var gGameState;
 var player;
+var cbjs = new ClipboardJS('.btn');
+
+// Set href link
+$('#gamelink').val(window.location.href);
 
  //TODO aka fast-fix (sure not for prod :) )
  var pathname = window.location.pathname;
@@ -10,20 +13,15 @@ var player;
 socket.on('connect', function () {
     console.log('Connected to server');
 
-    socket.emit('join', {roomId:id}, function (err) {
+    socket.emit('join', {roomId:id}, function (err, player) {
       if(err){
         alert(err);
         return (window.location.href = '/');
       }
-
     });
 });
 
 socket.on('updateGameState', function (gameState) {
-  //Set globalGameState
-  gGameState = gameState;
-  console.log(gameState);
-
   //TODO add another event where client fetch info about player after on.('join')
   // Set client player
   if(socket.id === gameState.playerX.id){
@@ -33,7 +31,7 @@ socket.on('updateGameState', function (gameState) {
   }
   
   // Change turn text
-  $('.title').html('It\'s <strong>' + gameState.turnPlayer + '</strong> move');
+  $('.turnmove').html('It\'s <strong>' + gameState.turnPlayer + '</strong> move');
 
   // Fill html game board
   var board = $('.square');
@@ -47,6 +45,9 @@ socket.on('updateGameState', function (gameState) {
       $(board[i]).addClass('o-marker');
     }
   }
+
+  // Set game score
+  $('.gamescore').html(gameState.playerX.winScore + '-' + gameState.playerO.winScore);
 
   // Set turn player
   if(gameState.turnPlayer === player.playerChar){

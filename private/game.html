@@ -7,13 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="/css/game.css">
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body class="body">
     <div class="container w-container">
         <div class="section">
-            <h1 class="title">It's
-                <strong>X</strong> move</h1>
+            <h1 class="title turnmove">
+                It &#x27;s
+                <strong>X</strong>
+                move
+            </h1>
+            <div class="w-row">
+                <div class="column w-col w-col-6">
+                    <h2 class="heading gamescore">0-0</h2>
+                </div>
+            </div>
             <div class="board clearfix">
                 <div class="row">
                     <div class="square" id="0"></div>
@@ -32,9 +41,15 @@
                 </div>
             </div>
         </div>
+        <div class="section-copy">
+            <h4 class="title-copy">Copy game link:</h4>
+            <input id="gamelink" value="https://github.com/zenorocha/clipboard.js.git" readonly>
+            <button class="btn" data-clipboard-target="#gamelink">Copy to clipboard</button>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
     <script src="/js/game.js"></script>
 </body>
 

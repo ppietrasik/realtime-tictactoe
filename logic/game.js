@@ -69,6 +69,8 @@ class Game {
     addPlayer(playerId) {
         if(!this.playerX.isSet()) this.playerX.id = playerId;
         else if (!this.playerO.isSet()) this.playerO.id = playerId;
+
+        return this.getPlayer(playerId);
     }
 
     getPlayer(playerId){
@@ -95,11 +97,18 @@ class Game {
         this.turnPlayer = this.turnPlayer === this.playerX ? this.playerO : this.playerX;
 
         //At least 5 turns have to pass to even consider that someone has won
-        if(this.gameBoard.length >= 5) return this.checkBoardWin();
+        if(this.boardPlays() >= 5) return this.checkBoardWin();
     }
 
     checkBoardWin(){
-        let winner;
+        let winner = null;
+
+        // Tie
+        if(this.boardPlays() >= 9){
+            this.resetBoard();
+            return winner;
+        }
+
         //Can be improved
         winConditions.forEach((winCondition) => {
             winner = this.gameBoard[winCondition[0]];
@@ -125,6 +134,11 @@ class Game {
             playerX: this.playerX,
             playerO: this.playerO
         };
+    }
+
+    // Return number of valid moves in game board (basiclly arr.length without undefined)
+    boardPlays(){
+        return this.gameBoard.filter((value) =>{ return value != null; }).length;
     }
 
     // Resets Game Board
