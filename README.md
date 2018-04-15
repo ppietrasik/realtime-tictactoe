@@ -1,4 +1,5 @@
 Real-Time socket.io tic-tac-toe game, made with node.js and socket.io
+![Tic-Tac-Toe](https://i.imgur.com/H0zUcKq.png)
 
 TODO: Cookies instead of sokcet.id?
 
