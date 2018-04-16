@@ -103,12 +103,6 @@ class Game {
     checkBoardWin(){
         let winner = null;
 
-        // Tie
-        if(this.boardPlays() >= 9){
-            this.resetBoard();
-            return winner;
-        }
-
         //Can be improved
         winConditions.forEach((winCondition) => {
             winner = this.gameBoard[winCondition[0]];
@@ -121,9 +115,16 @@ class Game {
                 winner.increaseWinScore();
                 // Reset GameBoard for next round
                 this.resetBoard();
-                return winner;
             }
         });
+
+        // Tie
+        if(this.boardPlays() >= 9){
+            this.resetBoard();
+            return winner;
+        }
+
+        return winner;
     }
 
     getGameState() {
